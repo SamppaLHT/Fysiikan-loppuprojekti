@@ -139,7 +139,7 @@ st.divider()
 st.header("GPS-datan epätarkkuus")
 
 # Laske realistinen matka askelten perusteella
-typical_step_length = 0.70  # metriä (tyypillinen 1.7m kävelijälle, vaihteluväli 0.65-0.75m)
+typical_step_length = 0.70  
 estimated_distance = steps_filtered * typical_step_length
 
 col_text, col_image = st.columns([3, 2])
@@ -313,7 +313,7 @@ with st.expander("Menetelmien ja laskujen selitykset"):
     ### Suodatettu signaali + piikinetsintä
     - **Z-komponentti:** Käytetään eteen-taakse suuntaista kiihtyvyyttä 
     - **Alipäästösuodatin:** Butterworth-suodatin (2.0 Hz) poistaa korkeataajuisen kohinan
-    - **Piikinetsintä:** Etsii paikalliset maksimiarvot, jotka ylittävät 5.0 m/s² kynnysarvon
+    - **Piikinetsintä:** Etsii paikalliset maksimiarvot, jotka ylittävät 7.0 m/s² kynnysarvon
     - **Etuna:** Tarkka yksittäisten askelten tunnistus
     - **Haittana:** Vaatii parametrien säätöä (kynnysarvo, etäisyys)
     
