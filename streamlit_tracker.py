@@ -13,8 +13,10 @@ st.title("Kävelydatan Analyysi")
 # Lataa data
 @st.cache_data
 def load_data():
-    acc_data = pd.read_csv('Data/Accelerometer.csv')
-    loc_data = pd.read_csv('Data/Location.csv')
+    # GitHub raw URLs for data files
+    base_url = 'https://raw.githubusercontent.com/SamppaLHT/Fysiikan-loppuprojekti/refs/heads/main/'
+    acc_data = pd.read_csv(base_url + 'Data/Accelerometer.csv')
+    loc_data = pd.read_csv(base_url + 'Data/Location.csv')
     
     cutoff_time = 5.0
     acc_data_filtered = acc_data[acc_data['Time (s)'] >= cutoff_time].copy()
@@ -165,7 +167,7 @@ with col_text:
     """)
 
 with col_image:
-    st.image('Images/distanceComparison.png', caption='Matkojen vertailu')
+    st.image('https://raw.githubusercontent.com/SamppaLHT/Fysiikan-loppuprojekti/refs/heads/main/Images/distanceComparison.png', caption='Matkojen vertailu')
 
 st.divider()
 
