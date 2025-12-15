@@ -311,24 +311,29 @@ st.divider()
 with st.expander("Menetelmien ja laskujen selitykset"):
     st.markdown("""
     ### Suodatettu signaali + piikinetsintä
-    - **Alipäästösuodatin** (Butterworth) poistaa korkeataajuisen kohinan
-    - **Piikinetsintä** etsii paikalliset maksimiarvot, jotka ylittävät kynnysarvon
+    - **Z-komponentti:** Käytetään eteen-taakse suuntaista kiihtyvyyttä 
+    - **Alipäästösuodatin:** Butterworth-suodatin (2.0 Hz) poistaa korkeataajuisen kohinan
+    - **Piikinetsintä:** Etsii paikalliset maksimiarvot, jotka ylittävät 5.0 m/s² kynnysarvon
     - **Etuna:** Tarkka yksittäisten askelten tunnistus
     - **Haittana:** Vaatii parametrien säätöä (kynnysarvo, etäisyys)
     
     ### Fourier-analyysi (FFT)
-    - **FFT** muuntaa aikasarjan taajuusalueelle
-    - **Dominoiva taajuus** vastaa askeltaajuutta
+    - **FFT:** Muuntaa aikasarjan taajuusalueelle
+    - **Tehospektri:** Näyttää voimakkuuden eri taajuuksilla (m²/s⁴)
+    - **Dominoiva taajuus:** Kävelyalueella (0.5-4.0 Hz) vastaa askeltaajuutta
     - **Etuna:** Ei vaadi parametrien säätöä, toimii kohinaisella datalla
     - **Haittana:** Olettaa tasaisen askeltaajuuden
     
-    ### GPS-datan analyysi
-    - **Kuljettu matka:** Laskettu Haversine-kaavalla GPS-pisteiden välillä
-    - **Keskinopeus:** Kokonaismatka jaettuna kävelyajalla
-    - **Askelpituus:** Kuljettu matka jaettuna askelmäärällä
+    ### GPS-datan epätarkkuus
+    - **GPS-matka:** {:.1f} m (laskettu Haversine-kaavalla GPS-pisteiden välillä)
+    - **Arvioitu todellinen matka:** 320 m (kolmannen osapuolen karttapalvelusta)
+    - **GPS-virhe:** GPS yliarvioi matkaa noin {:.1f}%
+    - **Askelpituus GPS:llä:** {:.2f} m (epärealistinen)
+    - **Askelpituus 320m:llä:** 0.72 m (realistinen 1.7m kävelijälle)
     
     ### Käytetyt kaavat
-    - Matka: Haversine-kaava (GPS lat/lon → metrit)
+    - GPS-matka: Haversine-kaava (lat/lon → metrit)
     - Nopeus: v = s / t
     - Askelpituus: L = s / n (missä s = matka, n = askelmäärä)
-    """)
+    - Tehospektri: P = (2/N) × |FFT|²
+    """.format(total_distance, (total_distance - 320) / 320 * 100, step_length_filtered))
